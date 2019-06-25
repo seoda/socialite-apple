@@ -2,6 +2,7 @@
 {
     "name": "seoda/socialite-apple",
     "description": "Apple OAuth2 Provider for Laravel Socialite",
+    "keywords": ["laravel", "socialite", "oauth", "oauth2", "apple"],
     "license": "MIT",
     "authors": [{
         "name": "yu-ji",
