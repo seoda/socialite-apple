@@ -53,8 +53,11 @@ class AppleProvider extends AbstractProvider
 
         return array_merge(
             $response,
-            json_decode(base64_decode(Arr::get($id_tokens, 0)), true),
-            json_decode(base64_decode(Arr::get($id_tokens, 1)), true)
+            [
+                'id_token_header' => json_decode(base64_decode(Arr::get($id_tokens, 0)), true),
+                'id_token_payload' => json_decode(base64_decode(Arr::get($id_tokens, 1)), true),
+                'id_token_signature' => Arr::get($id_tokens, 2),
+            ]
         );
     }
 
@@ -91,7 +94,7 @@ class AppleProvider extends AbstractProvider
     protected function mapUserToObject(array $user)
     {
         return (new User())->setRaw($user)->map([
-            'id' => $user['sub'],
+            'id' => $user['id_token_payload']['sub'],
             'name' => $user['name'] ?? null,
             'email' => $user['email'] ?? null,
         ]);
