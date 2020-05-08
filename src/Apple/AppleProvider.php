@@ -29,14 +29,12 @@ class AppleProvider extends AbstractProvider
      */
     protected function getAuthUrl($state)
     {
-        $url = $this->with([
+        return $this->with([
             'response_mode' => 'form_post'
         ])->buildAuthUrlFromBase(
             'https://appleid.apple.com/auth/authorize',
             $state
         );
-
-        return $url;
     }
 
     /**
